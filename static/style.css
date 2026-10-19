@@ -1,0 +1,40 @@
+:root{--bg:#f6fbf4;--fg:#1d3b2a;--titulo:#1d6b3a;--enlace:#2f8f4a;--header_bg:#f6fbf4;--header_fg:#1d3b2a;--card:#fff;--card_fg:#1d3b2a;--borde:#cfe8d4;--btn:#3aa655;--btn_fg:#fff;--precio:#1d6b3a;--input_bg:#fff;--input_fg:#1d3b2a;--flash_bg:#fff3c4;--flash_fg:#333;--login_c:#1e6fe0;--login_a:#8fdc9a;--glow:#3aa655;--sombra:#000}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif}
+h2,h3{color:var(--titulo)}a{color:var(--enlace)}
+header{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;flex-wrap:wrap;background:var(--header_bg);color:var(--header_fg)}
+nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap}nav a{color:var(--header_fg)}
+main{padding:16px;max-width:1100px;margin:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.card,.box{background:var(--card);color:var(--card_fg);border:1px solid var(--borde);border-radius:12px;padding:12px;box-shadow:0 2px 8px color-mix(in srgb,var(--sombra) 20%,transparent)}
+.card h3{color:var(--titulo)}.card b{color:var(--precio)}.card img{width:100%;height:220px;object-fit:contain}
+.box{max-width:380px;margin:auto;display:flex;flex-direction:column;gap:8px}.azul{border:3px solid var(--login_c)}.verde{border:3px solid var(--login_a)}
+nav a.login-c{background:var(--login_c);color:#fff;padding:6px 12px;border-radius:8px;text-decoration:none}nav a.login-a{background:var(--login_a);color:#123;padding:6px 12px;border-radius:8px;text-decoration:none}
+input,select,textarea{background:var(--input_bg);color:var(--input_fg);border:1px solid var(--borde);border-radius:6px;padding:6px}
+button,.btn{background:var(--btn);color:var(--btn_fg);border:0;padding:8px 14px;border-radius:8px;cursor:pointer;text-decoration:none}
+.flash{background:var(--flash_bg);color:var(--flash_fg);padding:8px;border-radius:8px}.cats{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.big{max-width:240px}
+.anuncio{max-width:640px;margin:0 auto 16px}.anun-img{width:100%;height:auto;max-height:420px;object-fit:contain}.anun-body{white-space:pre-wrap}
+.heart{font-size:18px}.coms p{margin:4px 0;font-size:14px}
+.colores{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}.colores label{display:flex;justify-content:space-between;align-items:center}
+/* ---- tarjetas de producto ---- */
+.grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+.pcard{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.pimg{position:relative;height:300px;background:color-mix(in srgb,var(--card) 92%,var(--glow));display:flex;align-items:center;justify-content:center}
+.pimg .slide{display:none;width:100%;height:100%;object-fit:contain}.pimg .slide.on{display:block}
+.pill{position:absolute;top:14px;right:14px;z-index:2;font-size:13px;font-weight:700;padding:5px 12px;border-radius:999px;background:color-mix(in srgb,var(--glow) 14%,#fff);color:color-mix(in srgb,var(--glow) 70%,#000);border:1px solid color-mix(in srgb,var(--glow) 35%,#fff)}
+.pill.out{background:#fff0f0;color:#d10000;border-color:#ffb3b3}
+.tag{position:absolute;top:14px;left:14px;z-index:2;background:var(--btn);color:var(--btn_fg);font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px;text-transform:uppercase}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;padding:0;background:#fff;color:#111;border:1px solid #111;z-index:2;font-size:18px}
+.prev{left:12px}.next{right:12px}
+.dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2}
+.dots i{width:8px;height:8px;border-radius:4px;background:#ccc}.dots i.on{width:22px;background:#111}
+.pbody{padding:16px 20px 18px}.ptop{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.ptop h3{margin:0;font-size:20px;color:var(--card_fg)}.price{font-size:20px}
+.desc{opacity:.65;margin:10px 0 16px}.acts{display:flex;gap:10px}
+.add{flex:1;border-radius:999px;padding:14px;font-weight:700;font-size:15px}.add:disabled{opacity:.4;cursor:not-allowed}
+.ver{padding:12px 20px;border-radius:999px;border:1px solid var(--card_fg);color:var(--card_fg);background:var(--card);text-decoration:none;font-weight:600}
+.cat{display:block;margin-top:14px;text-transform:uppercase;opacity:.5;font-size:12px;letter-spacing:.04em}
+/* tema normal: estilo de tarjetas con borde grueso y sombra dura */
+body[data-tema=normal] .pcard{border:2px solid var(--borde);border-radius:26px;box-shadow:7px 7px 0 var(--sombra)}
+body[data-tema=normal] .add{box-shadow:0 4px 0 var(--glow)}
+body[data-tema=normal] .ver{border-color:var(--borde)}
