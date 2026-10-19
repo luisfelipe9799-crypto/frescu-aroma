@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% block c %}<h2>Panel de administración</h2><p><a class="btn" href="/admin/anuncios">Anuncios</a> <a class="btn" href="/admin/tema">Editar temas</a></p>
+<h3>Productos</h3>
+{% for p in prods %}<form method="post" action="/admin/producto" enctype="multipart/form-data" class="row"><input type="hidden" name="id" value="{{ p.id }}">
+<input name="name" value="{{ p.name }}"><select name="category">{% for c in cats %}<option {{ 'selected' if c==p.category }}>{{ c }}</option>{% endfor %}</select>
+<input name="price" type="number" value="{{ p.price }}"><input name="stock" type="number" value="{{ p.stock }}"><input name="description" value="{{ p.description }}"><input name="etiqueta" value="{{ p['etiqueta'] or '' }}" placeholder="Etiqueta (ej. COMBO AHORRO)">
+<input type="file" name="images" multiple accept="image/*" title="Hasta 5 imágenes"><button>Guardar</button></form>{% endfor %}
+<h3>Nuevo producto</h3><form method="post" action="/admin/producto" enctype="multipart/form-data" class="row"><input name="name" placeholder="Nombre" required>
+<select name="category">{% for c in cats %}<option>{{ c }}</option>{% endfor %}</select><input name="price" type="number" placeholder="Precio" required><input name="stock" type="number" placeholder="Cantidad" required>
+<input name="description" placeholder="Descripción"><input name="etiqueta" placeholder="Etiqueta (ej. COMBO AHORRO)"><input type="file" name="images" multiple accept="image/*"><button>Crear</button></form>
+<h3>Pedidos delivery</h3>
+{% for o in orders %}<p>#{{ o.id }} {{ o.name }} · {{ o.address }} · {{ o.phone }} · {{ o['items'] }} · {{ o.total|cop }} ·
+{% if o.receipt %}<a href="{{ url_for('static', filename='uploads/' ~ o.receipt) }}" target="_blank">Comprobante</a>{% endif %} · <b>{{ o.status }}</b>
+{% if o.status!='Aprobado' %}<a class="btn" href="/admin/aprobar/{{ o.id }}">Aprobar</a>{% endif %}</p>{% endfor %}
+<h3>Cambiar contraseña</h3><form method="post" action="/admin/clave"><input name="new" type="password" required><button>Cambiar</button></form>{% endblock %}

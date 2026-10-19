@@ -1,0 +1,10 @@
+{% extends 'base.html' %}{% block c %}<h2>Anuncios</h2>
+{% for a in anuncios %}<article class="card anuncio" id="a{{ a.id }}">
+<h3 style="font-family:{{ a.fuente|fs }};color:{{ a.color }};text-align:{{ a.alineacion }}">{{ a.title }}</h3>
+{% if a.image %}<img class="anun-img" src="{{ url_for('static', filename='uploads/' ~ a.image) }}">{% endif %}
+<p class="anun-body" style="font-family:{{ a.fuente|fs }};font-size:{{ a.tamano }}px;color:{{ a.color }};text-align:{{ a.alineacion }}">{{ a.body }}</p>
+<small>{{ a.created }}</small>
+<form method="post" action="/anuncios/{{ a.id }}/like"><button class="heart">{{ '❤' if a.id in mis else '♡' }} {{ a.likes }}</button></form>
+<div class="coms">{% for c in a.coms %}<p><b>{{ c.username }}:</b> {{ c.text }} {% if session.admin %}<a href="/admin/comentario/{{ c.id }}/borrar">Borrar</a>{% endif %}</p>{% endfor %}</div>
+{% if session.uid or session.admin %}<form method="post" action="/anuncios/{{ a.id }}/comentar" class="row"><input name="text" maxlength="500" placeholder="Escribe un comentario" required><button>Comentar</button></form>
+{% else %}<small><a href="/login">Inicia sesión</a> para dar corazón y comentar.</small>{% endif %}</article>{% else %}<p>Aún no hay anuncios.</p>{% endfor %}{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}{% block c %}
+<div class="cats"><a href="/">Todos</a>{% for c in cats %}<a href="/?cat={{ c }}">{{ c }}</a>{% endfor %}</div>
+<div class="grid">{% for p in prods %}{% set imgs = p.images.split(',') if p.images else [] %}
+<article class="card pcard">
+<div class="pimg">
+{% if p['etiqueta'] %}<span class="tag">{{ p['etiqueta'] }}</span>{% endif %}
+{% if p.stock > 0 %}<span class="pill">{{ p.stock }} disponibles</span>{% else %}<span class="pill out">Agotado</span>{% endif %}
+{% for i in imgs %}<img class="slide{{ ' on' if loop.first }}" src="{{ url_for('static', filename='uploads/' ~ i) }}" alt="{{ p.name }}">{% endfor %}
+{% if imgs|length > 1 %}<button type="button" class="nav prev">‹</button><button type="button" class="nav next">›</button>
+<div class="dots">{% for i in imgs %}<i class="{{ 'on' if loop.first }}"></i>{% endfor %}</div>{% endif %}
+</div>
+<div class="pbody"><div class="ptop"><h3>{{ p.name }}</h3><b class="price">{{ p.price|cop }}</b></div>
+<p class="desc">{{ p.description }}</p>
+<form method="post" action="/carrito/agregar/{{ p.id }}" class="acts"><input type="hidden" name="qty" value="1">
+<button class="add" {{ 'disabled' if p.stock <= 0 }}>Agregar</button><a class="ver" href="/producto/{{ p.id }}">Ver</a></form>
+<small class="cat">{{ p.category }}</small></div></article>{% endfor %}</div>
+<script>document.querySelectorAll('.pimg').forEach(b=>{const s=[...b.querySelectorAll('.slide')],d=[...b.querySelectorAll('.dots i')];let i=0;
+const go=n=>{i=(n+s.length)%s.length;s.forEach((x,k)=>x.classList.toggle('on',k==i));d.forEach((x,k)=>x.classList.toggle('on',k==i))};
+const p=b.querySelector('.prev'),n=b.querySelector('.next');if(p)p.onclick=()=>go(i-1);if(n)n.onclick=()=>go(i+1)});</script>{% endblock %}

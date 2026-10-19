@@ -1,0 +1,11 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frescú Aroma</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"><link rel="stylesheet" href="/tema.css"></head>
+<body><header><a href="/"><img src="{{ url_for('static', filename='logo.png') }}" height="56" alt="Frescú Aroma"></a>
+<nav><a href="/">Productos</a><a href="/anuncios">Anuncios</a><a href="/carrito">Carrito</a>
+<select id="tema"><option value="normal">Normal</option><option value="arcade">Arcade</option><option value="navidad">Navidad</option><option value="neon">Neón</option></select>
+{% if session.user %}<a href="/perfil">{{ session.user }}</a><a href="/logout">Salir</a>
+{% elif session.admin %}<a href="/admin">Admin</a><a href="/logout">Salir</a>
+{% else %}<a class="login-c" href="/login">Inicio de Sesión</a><a class="login-a" href="/admin/login">Admin</a>{% endif %}</nav></header>
+<main>{% for m in get_flashed_messages() %}<p class="flash">{{ m }}</p>{% endfor %}{% block c %}{% endblock %}</main>
+<script>const t=document.getElementById('tema');t.value=localStorage.tema||'{{ tema_default }}';document.body.dataset.tema=t.value;
+t.onchange=()=>{localStorage.tema=t.value;document.body.dataset.tema=t.value}</script>{% block js %}{% endblock %}</body></html>

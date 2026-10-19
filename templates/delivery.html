@@ -1,0 +1,4 @@
+{% extends 'base.html' %}{% block c %}<h2>Delivery — solo disponible para Suba</h2><p>Total: {{ total|cop }}</p>
+<form method="post" enctype="multipart/form-data" class="box"><input name="name" placeholder="Nombre completo" required>
+<input name="address" placeholder="Dirección en Suba" required><input name="phone" placeholder="Teléfono de contacto" required>
+<label>Realizar pago en línea — adjunta tu comprobante</label><input type="file" name="receipt" accept="image/*" required><button>Enviar pedido</button></form>{% endblock %}

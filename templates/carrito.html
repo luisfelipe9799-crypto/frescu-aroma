@@ -1,0 +1,4 @@
+{% extends 'base.html' %}{% block c %}<h2>Carrito</h2>
+{% for p,q in items %}<p>{{ p.name }} x{{ q }} — {{ (p.price*q)|cop }} <a href="/carrito/quitar/{{ p.id }}">Quitar</a></p>{% else %}<p>Tu carrito está vacío.</p>{% endfor %}
+<h3>Total: {{ total|cop }}</h3>
+{% if items %}<a class="btn" href="{{ wa }}" target="_blank">Comprar por WhatsApp</a> <a class="btn" href="/delivery">Delivery (solo Suba)</a>{% endif %}{% endblock %}

@@ -1,0 +1,4 @@
+{% extends 'base.html' %}{% block c %}<h2>{{ p.name }}</h2>
+{% for i in p.images.split(',') if i %}<img class="big" src="{{ url_for('static', filename='uploads/' ~ i) }}">{% endfor %}
+<p>{{ p.description }}</p><p><b class="price">{{ p.price|cop }}</b> · {{ p.stock }} disponibles</p>
+{% if p.stock > 0 %}<form method="post" action="/carrito/agregar/{{ p.id }}" class="row"><input type="number" name="qty" value="1" min="1" max="{{ p.stock }}"><button>Agregar al carrito</button></form>{% endif %}{% endblock %}

@@ -1,0 +1,4 @@
+{% extends 'base.html' %}{% block c %}
+<form method="post" class="box {{ 'verde' if admin else 'azul' }}"><h2>{{ 'Administrador' if admin else 'Inicio de Sesión' }}</h2>
+<input name="username" placeholder="Usuario" required><input name="password" type="password" placeholder="Contraseña" required><button>Entrar</button>
+{% if not admin %}<a href="/registro">Registrarse</a> · <a href="https://wa.me/573016747447?text=Quiero%20recuperar%20mi%20contrase%C3%B1a">Recuperar contraseña</a>{% endif %}</form>{% endblock %}

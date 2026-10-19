@@ -1,0 +1,10 @@
+{% extends 'base.html' %}{% block c %}<h2>Editar temas</h2>
+<p>{% for n,l in nombres %}<a class="btn" href="/admin/tema?tema={{ n }}">{{ l }}</a> {% endfor %}</p>
+<form method="post"><input type="hidden" name="tema" value="{{ tema }}"><h3>Tema: {{ tema|capitalize }}</h3>
+<div class="colores">{% for k,l in cols %}<label>{{ l }}<input type="color" name="{{ k }}" value="{{ t[k] }}" oninput="document.body.style.setProperty('--'+this.name,this.value)"></label>{% endfor %}</div>
+<p><label><input type="checkbox" name="neon" value="1" {{ 'checked' if t.neon=='1' }}> Efecto neón en botones y tarjetas</label></p>
+<p><label>Fuente <select name="fuente">{% for k in fuentes %}<option value="{{ k }}" {{ 'selected' if t.fuente==k }}>{{ k }}</option>{% endfor %}</select></label></p>
+<p><label><input type="checkbox" name="default" value="1" {{ 'checked' if default==tema }}> Usar como tema inicial para los visitantes</label></p>
+<button name="accion" value="guardar">Guardar</button> <button name="accion" value="reset">Restaurar valores originales</button></form>
+<p><small>Los cambios se ven en vivo en esta página; se aplican a todos al guardar.</small></p>{% endblock %}
+{% block js %}<script>document.body.dataset.tema="{{ tema }}"</script>{% endblock %}

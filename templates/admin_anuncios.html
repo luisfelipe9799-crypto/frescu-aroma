@@ -1,0 +1,10 @@
+{% extends 'base.html' %}{% block c %}<h2>{{ 'Editar anuncio' if edit else 'Nuevo anuncio' }}</h2>
+<form method="post" enctype="multipart/form-data" class="box">{% if edit %}<input type="hidden" name="id" value="{{ edit.id }}">{% endif %}
+<input name="title" placeholder="Título" value="{{ edit.title if edit }}" required><textarea name="body" rows="5" placeholder="Información importante">{{ edit.body if edit }}</textarea>
+<label>Imagen <input type="file" name="image" accept="image/*"></label>
+<label>Tipo de letra <select name="fuente">{% for f in fonts %}<option {{ 'selected' if edit and edit.fuente==f }}>{{ f }}</option>{% endfor %}</select></label>
+<label>Tamaño <input type="number" name="tamano" min="12" max="48" value="{{ edit.tamano if edit else 16 }}"></label>
+<label>Color <input type="color" name="color" value="{{ edit.color if edit else '#1d3b2a' }}"></label>
+<label>Alineación <select name="alineacion">{% for v in ['left','center','right'] %}<option {{ 'selected' if edit and edit.alineacion==v }}>{{ v }}</option>{% endfor %}</select></label>
+<button>Publicar</button></form>
+<h3>Publicados</h3>{% for a in lista %}<p>{{ a.created }} — {{ a.title }} <a href="/admin/anuncios?edit={{ a.id }}">Editar</a> <a href="/admin/anuncio/{{ a.id }}/borrar" onclick="return confirm('¿Borrar?')">Borrar</a></p>{% endfor %}{% endblock %}
